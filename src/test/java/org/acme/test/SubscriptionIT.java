@@ -47,17 +47,17 @@ public class SubscriptionIT {
 
         PlanTestDTO dto = sub.getItems().getFirst();
         assertThat(dto).isNotNull();
-        assertThat(dto.eventId()).isNotNull();
-        assertThat(dto.time()).isNotNull();
-        assertThat(dto.score().hard()).isEqualTo(1);
-        assertThat(dto.score().soft()).isEqualTo(3);
-        assertThat(dto.score().medium()).isEqualTo(2);
-        assertThat(dto.events()).hasSize(3);
-        assertThat(dto.events().getFirst().eventId()).isNotNull();
-        assertThat(dto.events().getFirst().time()).isNotNull();
-        assertThat(dto.events().getFirst().score().hard()).isEqualTo(1);
-        assertThat(dto.events().getFirst().score().soft()).isEqualTo(3);
-        assertThat(dto.events().getFirst().score().medium()).isEqualTo(2);
+        assertThat(dto.getEventId()).isNotNull();
+        assertThat(dto.getTime()).isNotNull();
+        assertThat(dto.getScore().hard()).isEqualTo(1);
+        assertThat(dto.getScore().soft()).isEqualTo(3);
+        assertThat(dto.getScore().medium()).isEqualTo(2);
+        assertThat(dto.getEvents()).hasSize(3);
+        assertThat(dto.getEvents().getFirst().eventId()).isNotNull();
+        assertThat(dto.getEvents().getFirst().time()).isNotNull();
+        assertThat(dto.getEvents().getFirst().score().hard()).isEqualTo(1);
+        assertThat(dto.getEvents().getFirst().score().soft()).isEqualTo(3);
+        assertThat(dto.getEvents().getFirst().score().medium()).isEqualTo(2);
 
         sub.cancel();
         await().untilAsserted(() -> given().contentType(ContentType.TEXT)

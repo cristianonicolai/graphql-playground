@@ -34,10 +34,11 @@ public class GraphQLResource {
 
     @Query("plans")
     public List<PlanDTO> plans(UUID runId) {
-        return List.of();
+        return List.of(new PlanDTO(UUID.randomUUID(), new Score(1L, 2L, 3L), OffsetDateTime.now()));
     }
 
     public List<List<EventDTO>> events(@Source List<PlanDTO> dtos, Context context) {
+//    public List<EventDTO> events(@Source PlanDTO dto, Context context) {
         System.out.println("events context = " + context);
         System.out.println("context getSelectedFields = " + context.getSelectedFields());
         System.out.println("context getSelectedAndSourceFields = " + context.getSelectedAndSourceFields());
@@ -47,10 +48,12 @@ public class GraphQLResource {
 
         return dtos.stream().map(dto -> List.of(
                 getEvent(dto), getEvent(dto), getEvent(dto))).toList();
+//        return List.of(
+//                getEvent(dto), getEvent(dto), getEvent(dto));
     }
 
     private static EventDTO getEvent(PlanDTO dto) {
-        return new EventDTO(dto.eventId(), UUID.randomUUID(), new Score(1L, 2L, 3L), OffsetDateTime.now());
+        return new EventDTO(dto.getEventId(), UUID.randomUUID(), new Score(1L, 2L, 3L), OffsetDateTime.now());
     }
 
     @Subscription
